@@ -28,9 +28,10 @@ router.get(
     passport.authenticate("jwt", {session: false}),
     async (req, res) => {
         // We need to get all songs where artist id == currentUser._id
-        const songs = await Song.find({artist: req.user._id}).populate(
-            "artist"
-        );
+        const songs = await Song.find({artist: req.user._id});
+        // .populate(
+        //     "artist"
+        // );
         return res.status(200).json({data: songs});
     }
 );
@@ -62,7 +63,8 @@ router.get(
 
         // name:songName --> exact name matching. Vanilla, Vanila
         // Pattern matching instead of direct name matching.
-        const songs = await Song.find({name: songName}).populate("artist");
+        const songs = await Song.find({name: songName});
+        // .populate("artist");
         return res.status(200).json({data: songs});
     }
 );
